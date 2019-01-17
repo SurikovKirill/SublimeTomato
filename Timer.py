@@ -1,14 +1,21 @@
 import sublime, sublime_plugin
 import threading  
 import time
+import winsound
+import csv
+from datetime import datetime
 
 i=0
+pomodoro_value=0
+
 def show_notification():
-    #playsound.playsound('Sound_11330.wav', True)
-    #winsound.PlaySound("Sound_11330.wav", winsound.SND_ASYNC)
-    sublime.message_dialog("Drink some water")
-    sublime.status_message("Drink some water")
-    
+    global pomodoro_value
+    winsound.PlaySound('C:/Users/kiril/AppData/Roaming/Sublime Text 3/Packages/MyPlugin/Sound_11330.wav', winsound.SND_FILENAME)
+    sublime.message_dialog("Eat pomodoro and press [Ctrl+Alt+t]")
+    pomodoro_value+=1
+    sublime.status_message("Ok, let's move on, press [Ctrl+Alt+t]")
+
+
 def write_time():
     sublime.status_message(time_manage(i))
 
@@ -36,7 +43,12 @@ class timer(threading.Thread):
     
     def zeroing(self):
         global i
-        i=0    
+        i=0
+        #save_pomodoro()
+
+    def showStatus(self):
+        global i
+        sublime.status_message(time_manage(i))
 
 
 
@@ -64,4 +76,9 @@ class gtimerzeroCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         global thread1         
         thread1.zeroing()
-        
+
+class gtimerstatusCommand(sublime_plugin.TextCommand):
+    def run(self, edit):
+        global thread1         
+        thread1.showStatus()
+

@@ -1,5 +1,6 @@
 [
 { "keys": ["ctrl+alt+t"], "command": "gtimer" },
 { "keys": ["ctrl+alt+p"], "command": "gtimerpause" },
-{ "keys": ["ctrl+alt+z"], "command": "gtimerzero" }
+{ "keys": ["ctrl+alt+z"], "command": "gtimerzero" },
+{ "keys": ["ctrl+alt+i+s"], "command": "gtimerstatus" },
 ]

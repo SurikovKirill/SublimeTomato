@@ -15,6 +15,13 @@ def show_notification():
     pomodoro_value+=1
     sublime.status_message("Ok, let's move on, press [Ctrl+Alt+t]")
 
+def save_pomodoro(): 
+    global pomodoro_value 
+    with open('C:/Users/kiril/AppData/Roaming/Sublime Text 3/Packages/MyPlugin/pom.csv', 'a', newline="") as csvfile: 
+        writer=csv.writer(csvfile)
+        date=datetime.strftime(datetime.now(), "%Y.%m.%d %H:%M:%S") 
+        writer.writerow([date, pomodoro_value]) 
+        pomodoro_value=0
 
 def write_time():
     sublime.status_message(time_manage(i))
@@ -44,7 +51,7 @@ class timer(threading.Thread):
     def zeroing(self):
         global i
         i=0
-        #save_pomodoro()
+        save_pomodoro()
 
     def showStatus(self):
         global i
